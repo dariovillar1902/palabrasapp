@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Palabras App </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Kanit:ital,wght@0,900;1,900&family=Montserrat:ital,wght@0,900;1,900&family=Public+Sans:ital,wght@0,900;1,900&family=Roboto:ital,wght@0,900;1,900&family=Varela+Round&display=swap" rel="stylesheet">
+<style>
+
+    #pagina {
+        padding-top: 20px;
+        margin: auto;
+        text-align: center;
+    }
+</style>            
+</head>
+<body id="pagina">
+    <h1> Palabras App </h1>
+    <h3> Nivel <span id="nivelActual"> 1 </span></h3>
+    <h5 id="anagrama"> savca </h5>
+    <form id="formPalabra">
+        <input type="text" name="palabra" id="textoPalabra">
+        <button type="submit" id="botonEnviar">Enviar</button>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        
+        const tresLetras = ["vid", "dar", "bar", "ver", "pan", "cal", "mal", "feo", "sol", "fin", "gen", "pis", "uno", "rio", "feo", "sal", "oir", "ego", "rap", "ley", "fea", "red", "hoz", "fan", "bus", "uno"];
+        const cincoLetras = ["vacas", "novia", "queso", "viejo", "disco", "oveja", "heroe", "rusia", "plata", "dañar", "bajon", "brisa", "hielo", "frase", "toser", "susto", "otoño", "forro", "golpe", "tanga", "peaje", "debut", "plomo", "monje", "genio", "ramal", "tropa", "morse", "llano", "verde", "prado", "barba", "pluma", "solar", "caras", "tropa", "toser", "latex", "oliva", "indio", "sidra", "mover", "pozos", "pillo", "cargo", "puños", "palma", "grado", "ancla", "doler", "señor", "herir", "brote", "etica", "crema", "manta", "vacia", "gallo", "orina", "puros", "pecho", "abrir", "dulce", "ancho", "hueso", "cabra", "horas", "remos", "patas", "salsa", "ataca", "ratas", "torax", "hacha", "roble", "rueda", "araña", "pesar", "cebra", "buena", "letal", "ondas", "clips", "choza", "panal", "ciego", "madre", "perro", "mujer", "larva", "redes", "animo", "rubor", "tinto", "queso", "lleno", "bella", "orden", "micro", "llano", "super", "diosa", "canoa", "cajon", "leche", "adios", "hielo", "robot", "pulpo", "salsa", "atico", "fondo", "guapa", "cerca", "valle", "tesis", "peaje", "oasis", "viuda", "comer", "sacar", "rojos", "acero", "borla", "vieja", "arroz", "sobre", "ramal", "pozos", "rigor", "plaza", "hacha", "horas", "torax", "pesar", "ostra", "sordo", "error", "tunel", "cueva", "fotos", "civil", "salud", "regar", "viaje", "arena", "fruta", "polos", "extra", "venir", "fauna", "corto", "marca", "comer", "mocos", "actor", "cebra", "zorro", "hijos", "pista", "farol", "limon", "pluma", "manos", "cacao", "tutor", "yegua", "marea", "canta", "bella", "idolo", "curso", "misil", "gasto", "ganar", "señas", "grito", "astro", "metal", "pizza", "vuelo", "recta", "reina", "judia", "hogar", "raton", "enano", "rizos", "listo", "palos", "bolso", "freno", "jarra", "valle", "tigre", "tenis", "mujer", "bebes", "fruta", "algas", "matas", "acera", "bizco", "yunta", "tapar", "horno", "cable", "trozo", "plana", "canta", "balon", "libre", "nudos", "venus", "carpa", "temer", "guion", "varon", "tieso", "ciego", "cabra", "raton", "chita", "botes", "dolar", "coger", "sexta", "bache", "pelos", "lanza", "plana", "rival", "medir", "rueda", "sesos", "atico", "envio", "error", "señal", "cazar", "falda", "bolas", "fosas", "susto", "sello", "icono", "plomo", "error", "tapiz", "amigo", "pedir", "plazo", "recta", "algas", "cuero", "hielo", "tapas", "simio", "gente", "picos", "toser", "funda", "cacao", "pillo", "ramas", "preso", "cobra", "sobre", "marte", "miedo", "impar", "joyas", "dieta", "etnia", "ramas", "coste", "prado", "palos", "sismo", "dudar", "golpe", "video", "audaz", "carro", "bello", "ninja", "pulpo", "rogar", "vivir", "fallo", "brote", "senda", "lapiz", "sauce", "jabon", "negro", "fauna", "debil", "ruido", "falda", "vagon", "hacer", "blusa", "sidra", "bebes", "cejas", "fluir", "brisa", "tubos", "otoño", "plaga", "pisos", "tibio", "arado", "queja", "oliva", "ramas", "guion", "genio", "tieso", "vital", "angel", "tejer", "jarra", "pares", "hogar", "muela", "nuevo", "pavos", "pesar", "virus", "telon", "termo", "heroe", "error", "rubia", "ataca", "nafta", "hilos", "rango", "oasis", "vista", "salud", "tocar", "aviso", "mando", "rotor", "actor", "canta", "trazo", "antes", "rutas", "tapas", "curva", "bizco", "hilos", "fruta", "grado", "armas", "vidal", "mares", "laser", "pulpo", "banda", "risas", "robar", "pasta", "datil", "morsa", "mango", "final", "album", "natal", "ojear", "tapiz", "cebar", "panda", "oveja", "pulga", "lento", "cifra", "carne", "micro", "debil", "patio", "botin", "mayor", "choza", "raton", "animo", "potro", "color", "exito", "cosas", "jamon", "nieve", "calvo", "pulga", "trono", "aspen", "clara", "atomo", "malla", "torpe", "fibra", "sobre", "echar", "avion", "campo", "humor", "criar", "rayas", "cesta", "sucio", "audio", "aleta", "buque", "gorra", "plomo", "amigo", "bombo", "torno", "guapo", "pegar", "bolsa", "melon", "pinta", "justa", "huido", "novio", "labio", "grasa", "grupo", "ropas", "guapo", "honda", "copia", "tabla", "santo", "puñal", "chico", "vacio", "multa", "salsa", "papel", "salas", "prisa", "carro", "gusto", "miope", "galan", "ramos", "jugar", "anden", "aldea", "ficha", "haren", "saber", "caldo", "misil", "metro", "ovalo", "latir", "corto", "gafas", "finca", "cabra", "enero", "maton", "arder", "espia", "dulce", "verbo", "lucro", "mojar", "carta", "piano", "dosis", "niñas", "sumar", "chino", "ducha", "poema", "forma", "menor", "carga", "hueso", "abeja", "pausa", "oxido", "turno"];
+        const sieteLetras = ["ocupaba", "tatuaje", "retrato", "apresar", "jeringa", "potente", "juzgado", "perilla", "pulgada", "alegria", "nivelar", "vigilar", "adivino", "ardilla", "nobleza", "exponer", "muertas", "flamear", "prision", "simples", "debatir", "adentro", "colador", "muñecos", "tobogan", "tablero", "citados", "señales", "doctora", "montaña", "favores", "jovenes", "balizas", "madurar", "escucha", "penales", "vocales", "manchar", "grafica", "victima", "gallina", "jornada", "maestra", "guardia", "rebelde", "hermano", "alentar", "escaños", "factura", "esquina", "acercar"];
+        let nivelActual = 1;
+        let palabraActual = ""
+
+        // Declaración de variables: arrays de 3, 5 y 7 letras, el nivel actual y la palabra actual.
+
+        function onlyUnique(value, index, self) {
+            return self.indexOf(value) === index;
+        }
+
+        // Función que saqué de Stack Overflow por si alguna de las palabras del array se repetía.
+
+        function desordenarPalabra(palabra){
+            let caracteresPalabra = [];
+            let estadoCaracteres = [];
+            let palabraDesordenada = "";
+            for (let i = 0; i < palabra.length; i++){
+                caracteresPalabra = [...caracteresPalabra, palabra[i]];
+                estadoCaracteres = [...estadoCaracteres, false];
+
+                // Operador spread sirve igual que array.push pero es más eficiente. En este caso, paso los caracteres de la palabra a un array.
+            }
+            console.log(caracteresPalabra);
+            while (estadoCaracteres.includes(false)){
+                /* Tuve que poner el estado de cada caracter para evitar que se repitan las letras en el bucle. 
+                Entonces, si en el array sigue habiendo estados false, que se siga repitiendo hasta que ya no haya.
+                Pero ojo, una vez que una letra ya cambió de lugar, su estado pasa a ser true. 
+                Esto hace que cada letra cambie de lugar una sola vez.
+                */
+                let indiceLetra = Math.floor(Math.random() * caracteresPalabra.length);
+                if (!estadoCaracteres[indiceLetra]){
+                    palabraDesordenada += caracteresPalabra[indiceLetra];
+                    estadoCaracteres[indiceLetra] = true;
+                }   
+            } 
+            console.log(palabraDesordenada);
+            console.log(estadoCaracteres);
+
+            /* Siempre hago los console.log para verificar el output de las funciones, de cualquier cosa de código que haga. 
+            Me parece mucho más fácil que hacer debugging, pero eso ya es muy personal y está bien si querés hacerlo.
+            */
+
+            let anagrama = document.getElementById("anagrama");
+            anagrama.innerText = palabraDesordenada;
+            return palabraDesordenada;
+        }
+
+        let textoNivel = document.getElementById("nivelActual");
+
+        cambiarNivel(1);
+
+        function cambiarNivel(nivelActual) {
+            switch (nivelActual) {
+                case 1:
+                    textoNivel.innerText = nivelActual;
+                    let unique1 = tresLetras.filter(onlyUnique);
+                    let indice1 = Math.floor(Math.random() * unique1.length);
+                    palabraActual = unique1[indice1];
+
+                    // elige una palabra aleatoria del array de tres letras.
+
+                    console.log(palabraActual);
+                    desordenarPalabra(palabraActual);
+                    break;
+
+                case 2:
+                    textoNivel.innerText = nivelActual;
+                    let unique2 = cincoLetras.filter(onlyUnique);
+                    let indice2 = Math.floor(Math.random() * unique2.length);
+                    palabraActual = unique2[indice2];
+
+                    console.log(palabraActual);
+                    desordenarPalabra(palabraActual);
+                    break;
+
+                case 3:
+                    textoNivel.innerText = nivelActual;
+                    let unique3 = sieteLetras.filter(onlyUnique);
+                    let indice3 = Math.floor(Math.random() * unique3.length);
+                    palabraActual = unique3[indice3];
+
+                    console.log(palabraActual);
+                    desordenarPalabra(palabraActual);
+                    break;
+
+                default:
+                    textoNivel.innerText = "Fin del juego";
+                    break;      
+            }
+        }
+
+       
+
+        let formPalabra = document.getElementById("formPalabra");
+        
+        formPalabra.onsubmit = function procesarPalabra(e){
+            e.preventDefault();
+            let inputPalabra = document.getElementById("textoPalabra").value;
+            console.log(inputPalabra);
+            checkPalabra(inputPalabra);
+           
+        }
+        
+        function checkPalabra(inputPalabra) {
+
+            if (inputPalabra === palabraActual){
+                console.log("Ganaste!");
+                nivelActual += 1;
+                cambiarNivel(nivelActual);
+            } else {
+                console.log("Intenta nuevamente");
+            }
+            
+        }
+
+    </script>
+    
+</body>
+</html>
